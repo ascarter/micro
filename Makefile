@@ -33,8 +33,7 @@ install-quick:
 	go install -ldflags "-s -w -X main.Version=$(VERSION) -X main.CommitHash=$(HASH) -X 'main.CompileDate=$(DATE)' $(ADDITIONAL_GO_LINKER_FLAGS)"  ./cmd/micro
 
 update:
-	git pull
-	git submodule update --init
+	cd cmd/micro && dep ensure -vendor-only
 
 # Builds the runtime
 runtime:
