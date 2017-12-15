@@ -9,6 +9,7 @@ ADDITIONAL_GO_LINKER_FLAGS := $(shell GOOS=$(shell go env GOHOSTOS) \
 	GOARCH=$(shell go env GOHOSTARCH) \
 	go run tools/info-plist.go "$(VERSION)")
 GOBIN ?= $(shell go env GOPATH)/bin
+VENDOR_DIR = ./cmd/micro/vendor
 
 # Builds micro after checking dependencies but without updating the runtime
 build: update
@@ -45,4 +46,6 @@ test:
 	go test ./cmd/micro
 
 clean:
+	go clean -i ./cmd/micro
+	rm -Rf $(VENDOR_DIR)
 	rm -f micro
